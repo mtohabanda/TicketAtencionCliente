@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="db_Tickek_AtencionClienteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cola">
+          <Key>
+            <PropertyRef Name="IdCola" />
+          </Key>
+          <Property Name="IdCola" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TiempoDuracionAtencion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ColaCliente">
+          <Key>
+            <PropertyRef Name="IdCola" />
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCola" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="EstadoAtencion" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="ColaCliente_Cliente_FK">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="ColaCliente" Type="Self.ColaCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ColaCliente">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ColaCliente_ColaAtencionCliente_FK">
+          <End Role="Cola" Type="Self.Cola" Multiplicity="1" />
+          <End Role="ColaCliente" Type="Self.ColaCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cola">
+              <PropertyRef Name="IdCola" />
+            </Principal>
+            <Dependent Role="ColaCliente">
+              <PropertyRef Name="IdCola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_Tickek_AtencionClienteModelStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cola" EntityType="Self.Cola" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ColaCliente" EntityType="Self.ColaCliente" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="ColaCliente_Cliente_FK" Association="Self.ColaCliente_Cliente_FK">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ColaCliente" EntitySet="ColaCliente" />
+          </AssociationSet>
+          <AssociationSet Name="ColaCliente_ColaAtencionCliente_FK" Association="Self.ColaCliente_ColaAtencionCliente_FK">
+            <End Role="Cola" EntitySet="Cola" />
+            <End Role="ColaCliente" EntitySet="ColaCliente" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_Tickek_AtencionClienteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ColaCliente" Relationship="Self.ColaCliente_Cliente_FK" FromRole="Cliente" ToRole="ColaCliente" />
+        </EntityType>
+        <EntityType Name="ColaCliente">
+          <Key>
+            <PropertyRef Name="IdCola" />
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCola" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="EstadoAtencion" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.ColaCliente_Cliente_FK" FromRole="ColaCliente" ToRole="Cliente" />
+          <NavigationProperty Name="Cola" Relationship="db_Tickek_AtencionClienteModel.ColaCliente_ColaAtencionCliente_FK" FromRole="ColaCliente" ToRole="Cola" />
+        </EntityType>
+        <Association Name="ColaCliente_Cliente_FK">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="ColaCliente" Type="Self.ColaCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ColaCliente">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_Tickek_AtencionClienteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="ColaCliente" EntityType="Self.ColaCliente" />
+          <AssociationSet Name="ColaCliente_Cliente_FK" Association="Self.ColaCliente_Cliente_FK">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ColaCliente" EntitySet="ColaCliente" />
+          </AssociationSet>
+          <EntitySet Name="Cola" EntityType="db_Tickek_AtencionClienteModel.Cola" />
+          <AssociationSet Name="ColaCliente_ColaAtencionCliente_FK" Association="db_Tickek_AtencionClienteModel.ColaCliente_ColaAtencionCliente_FK">
+            <End Role="Cola" EntitySet="Cola" />
+            <End Role="ColaCliente" EntitySet="ColaCliente" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cola">
+          <Key>
+            <PropertyRef Name="IdCola" />
+          </Key>
+          <Property Name="IdCola" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TiempoDuracionAtencion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ColaCliente" Relationship="db_Tickek_AtencionClienteModel.ColaCliente_ColaAtencionCliente_FK" FromRole="Cola" ToRole="ColaCliente" />
+        </EntityType>
+        <Association Name="ColaCliente_ColaAtencionCliente_FK">
+          <End Type="db_Tickek_AtencionClienteModel.Cola" Role="Cola" Multiplicity="1" />
+          <End Type="db_Tickek_AtencionClienteModel.ColaCliente" Role="ColaCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cola">
+              <PropertyRef Name="IdCola" />
+            </Principal>
+            <Dependent Role="ColaCliente">
+              <PropertyRef Name="IdCola" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_Tickek_AtencionClienteModelStoreContainer" CdmEntityContainer="db_Tickek_AtencionClienteEntities">
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="db_Tickek_AtencionClienteModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColaCliente">
+            <EntityTypeMapping TypeName="db_Tickek_AtencionClienteModel.ColaCliente">
+              <MappingFragment StoreEntitySet="ColaCliente">
+                <ScalarProperty Name="IdCola" ColumnName="IdCola" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="EstadoAtencion" ColumnName="EstadoAtencion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cola">
+            <EntityTypeMapping TypeName="db_Tickek_AtencionClienteModel.Cola">
+              <MappingFragment StoreEntitySet="Cola">
+                <ScalarProperty Name="TiempoDuracionAtencion" ColumnName="TiempoDuracionAtencion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdCola" ColumnName="IdCola" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

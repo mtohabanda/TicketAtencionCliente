@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_Tickek_AtencionClienteModelStoreContainer" CdmEntityContainer="db_Tickek_AtencionClienteEntities">
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="db_Tickek_AtencionClienteModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ColaCliente">
+      <EntityTypeMapping TypeName="db_Tickek_AtencionClienteModel.ColaCliente">
+        <MappingFragment StoreEntitySet="ColaCliente">
+          <ScalarProperty Name="IdCola" ColumnName="IdCola" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="EstadoAtencion" ColumnName="EstadoAtencion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cola">
+      <EntityTypeMapping TypeName="db_Tickek_AtencionClienteModel.Cola">
+        <MappingFragment StoreEntitySet="Cola">
+          <ScalarProperty Name="TiempoDuracionAtencion" ColumnName="TiempoDuracionAtencion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdCola" ColumnName="IdCola" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

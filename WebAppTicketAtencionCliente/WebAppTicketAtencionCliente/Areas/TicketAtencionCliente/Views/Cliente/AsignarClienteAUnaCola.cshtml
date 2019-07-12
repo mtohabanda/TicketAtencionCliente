@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BAL.Modelos.ColaClienteModelo>
+
+@{
+    ViewBag.Title = "Asignar Cliente A Una Cola";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+   
+    <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <p style="font-size: 1.875em">Cliente: @ViewBag.ClienteAsignar.Id -  @ViewBag.ClienteAsignar.Nombres </p>
+            </div>
+            <div class="col-md-offset-2 col-md-5">
+                @if (ViewBag.ClienteAsignar.Id != 0)
+                {                 
+                    <input id="asignar" type="submit" value="Asignar Cliente a una Cola" name="asignar" class="btn btn-primary" />
+
+                }
+                @Html.ActionLink("Registar Un Nuevo Cliente", "AddCliente", new { },new { @class = "btn btn-success"})
+            </div>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCola)
+        </th>
+        <th>
+            <span>Cliente</span>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoAtencion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCola)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreCliente ) 
+        </td>
+        <td>
+           @if (item.EstadoAtencion == "N") {
+             <span>No Atendido</span>
+           }
+           else {
+             <span>Antendido</span>
+           }
+        </td>
+    </tr>
+}
+
+</table>

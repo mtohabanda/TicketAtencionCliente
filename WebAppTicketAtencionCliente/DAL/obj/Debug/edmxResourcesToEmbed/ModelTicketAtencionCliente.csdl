@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_Tickek_AtencionClienteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ColaCliente" Relationship="Self.ColaCliente_Cliente_FK" FromRole="Cliente" ToRole="ColaCliente" />
+  </EntityType>
+  <EntityType Name="ColaCliente">
+    <Key>
+      <PropertyRef Name="IdCola" />
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCola" Type="Int32" Nullable="false" />
+    <Property Name="IdCliente" Type="Int32" Nullable="false" />
+    <Property Name="EstadoAtencion" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.ColaCliente_Cliente_FK" FromRole="ColaCliente" ToRole="Cliente" />
+    <NavigationProperty Name="Cola" Relationship="db_Tickek_AtencionClienteModel.ColaCliente_ColaAtencionCliente_FK" FromRole="ColaCliente" ToRole="Cola" />
+  </EntityType>
+  <Association Name="ColaCliente_Cliente_FK">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="ColaCliente" Type="Self.ColaCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ColaCliente">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_Tickek_AtencionClienteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="ColaCliente" EntityType="Self.ColaCliente" />
+    <AssociationSet Name="ColaCliente_Cliente_FK" Association="Self.ColaCliente_Cliente_FK">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="ColaCliente" EntitySet="ColaCliente" />
+    </AssociationSet>
+    <EntitySet Name="Cola" EntityType="db_Tickek_AtencionClienteModel.Cola" />
+    <AssociationSet Name="ColaCliente_ColaAtencionCliente_FK" Association="db_Tickek_AtencionClienteModel.ColaCliente_ColaAtencionCliente_FK">
+      <End Role="Cola" EntitySet="Cola" />
+      <End Role="ColaCliente" EntitySet="ColaCliente" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cola">
+    <Key>
+      <PropertyRef Name="IdCola" />
+    </Key>
+    <Property Name="IdCola" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TiempoDuracionAtencion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ColaCliente" Relationship="db_Tickek_AtencionClienteModel.ColaCliente_ColaAtencionCliente_FK" FromRole="Cola" ToRole="ColaCliente" />
+  </EntityType>
+  <Association Name="ColaCliente_ColaAtencionCliente_FK">
+    <End Type="db_Tickek_AtencionClienteModel.Cola" Role="Cola" Multiplicity="1" />
+    <End Type="db_Tickek_AtencionClienteModel.ColaCliente" Role="ColaCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cola">
+        <PropertyRef Name="IdCola" />
+      </Principal>
+      <Dependent Role="ColaCliente">
+        <PropertyRef Name="IdCola" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,12 @@
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\bin\Debug\DAL.dll.config
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\bin\Debug\DAL.dll
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\bin\Debug\DAL.pdb
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\bin\Debug\EntityFramework.dll
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\bin\Debug\EntityFramework.xml
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\bin\Debug\es\EntityFramework.resources.dll
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\bin\Debug\es\EntityFramework.SqlServer.resources.dll
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\obj\Debug\DAL.dll
+C:\Users\SONY\Desktop\TicketAtencionClienteApp\WebAppTicketAtencionCliente\DAL\obj\Debug\DAL.pdb
